@@ -17,7 +17,7 @@ def solve(num_queens):
 
     # solve it here!
     def bkt(solution):
-        if not __valid(solution): # Mata la rama ya que no es valida.
+        if not valid(solution): # Mata la rama ya que no es valida.
             return 
         if len(solution) == n_queens: # Lo añade a la lista.
             solutions_list.append(solution)
@@ -26,7 +26,7 @@ def solve(num_queens):
                 bkt(solution+[i])
     
     """Chequea que la solución sea valida."""
-    def __valid(solution):
+    def valid(solution):
         for i in range(len(solution)-1):
             for j in range(i+1,len(solution)):
                 if (solution[i] == solution[j]) or (j-i == abs(solution[j]-solution[i])): # Chequea que no haya 2 reinas por diagonal o por diagonal.
