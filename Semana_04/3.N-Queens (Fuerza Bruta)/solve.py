@@ -17,6 +17,7 @@ def solve(num_queens):
 
     solutions_list = []
 
+    # solve it here!
     """Verifica la validez"""
     def valid(solution):
         for i in range(len(solution)-1):
@@ -25,7 +26,6 @@ def solve(num_queens):
                     return False
         return True
 
-    # solve it here!
     for combination in My_Iterator(num_queens, num_queens).next(): # Comprueba todas las combinaciones.
         if valid(combination):
             solutions_list.append(combination)
