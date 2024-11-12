@@ -17,32 +17,17 @@ def solve(num_queens):
 
     solutions_list = []
 
+    """Verifica la validez"""
+    def valid(solution):
+        for i in range(len(solution)-1):
+            for j in range(i+1, len(solution)):
+                if (solution[i] == solution[j]) or (j-i == abs(solution[j]-solution[i])): # Chequea que no haya 2 reinas por fila y que no haya 2 reinas por diagonal.
+                    return False
+        return True
+
     # solve it here!
-    for combination in My_Iterator(num_queens, num_queens).next():
-
-        valid_solution = True
-
-        # Comprueba que ninguna reina comparte eje y.
-        for i in range(num_queens):
-            if combination[i] in combination[0:i]:
-                valid_solution = False
-                break
-        
-        # Se descarta si el requisito anterior no se cumple.
-        if not valid_solution:
-            continue
-        
-        # Comprueba que ninguna reina comparte diagonal.
-        for i in range(num_queens):
-            for j in range(1, num_queens-i):
-                if combination[i] == combination[i+j] + j or \
-                   combination[i] == combination[i+j] - j:
-                    valid_solution = False
-                    break
-
-        # Se añade si la solucion es valida.
-        if valid_solution:
+    for combination in My_Iterator(num_queens, num_queens).next(): # Comprueba todas las combinaciones.
+        if valid(combination):
             solutions_list.append(combination)
-
 
     return solutions_list
