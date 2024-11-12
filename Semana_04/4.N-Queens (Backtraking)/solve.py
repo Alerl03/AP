@@ -16,40 +16,20 @@ def solve(num_queens):
     solutions_list = []
 
     # solve it here!
-    def btg(combination):
-        """Mediante DFS buscamos la combinacion correcta."""
-        
-        combination.append(None)
-
-        for pos in range(num_queens):
-            
-            # probamos las distintas combinaciones
-            combination[-1] = pos
-            
-            # Verificamos que es una combinacion válida.
-            if global_check(combination):
-                if len(combination) == num_queens:
-                    solutions_list.append(copy(combination))
-                else:
-                    btg(copy(combination))
+    def bkt(solution):
+        if not __valid(solution): # Mata la rama ya que no es valida.
+            return 
+        if len(solution) == n_queens: # Lo añade a la lista.
+            solutions_list.append(solution)
+        else: # Se recorre el arbol.
+            for i in range(n_queens):
+                bkt(solution+[i])
     
-    def global_check(combination):
-        """Comprueba que sea una combinación valida de Nx(1...N)."""
-        return yaxis_check(combination) and diagonal_check(combination)
-    
-    def yaxis_check(combination):
-        """Comprueba que ninguna reina comparte eje y."""
-        for i in range(len(combination)):
-            if combination[i] in combination[0:i]:
-               return False
-        return True
-    
-    def diagonal_check(combination):
-        """Comprueba que ninguna reina comparte diagonal."""
-        for i in range(len(combination)):
-            for j in range(1, len(combination) - i):
-                if combination[i] == combination[i+j] + j or \
-                   combination[i] == combination[i+j] - j:
+    """Chequea que la solución sea valida."""
+    def __valid(solution):
+        for i in range(len(solution)-1):
+            for j in range(i+1,len(solution)):
+                if (solution[i] == solution[j]) or (j-i == abs(solution[j]-solution[i])): # Chequea que no haya 2 reinas por diagonal o por diagonal.
                     return False
         return True
     
