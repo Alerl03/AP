@@ -19,10 +19,10 @@ def solve(num_queens):
     def bkt(solution):
         if not valid(solution): # Mata la rama ya que no es valida.
             return 
-        if len(solution) == n_queens: # Lo añade a la lista.
+        if len(solution) == num_queens: # Lo añade a la lista.
             solutions_list.append(solution)
         else: # Se recorre el arbol.
-            for i in range(n_queens):
+            for i in range(num_queens):
                 bkt(solution+[i])
     
     """Chequea que la solución sea valida."""
@@ -34,6 +34,6 @@ def solve(num_queens):
         return True
     
     # Primera combinación.
-    btg([])
+    bkt([])
         
     return solutions_list
