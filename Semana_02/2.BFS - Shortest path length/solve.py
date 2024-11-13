@@ -22,7 +22,7 @@ def bfs_path_length(graph, first_node):
     Q.enqueue(first_node)
     distance[first_node] = 0
     
-    # Empieza el bucle
+    # Bucle BFS.
     while not Q.isEmpty():
         current = Q.dequeue()
         for node in graph.neighbors(current):
