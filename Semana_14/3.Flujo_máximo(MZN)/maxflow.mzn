@@ -23,8 +23,6 @@ constraint forall(e in 1..num_edges)(flow[e] <= capacity[e] /\ flow[e] >= 0);
 constraint forall(n in 1..num_nodes where n != sink /\ n != source)(
                     sum(e in 1..num_edges where edges[e,1] == n)(flow[e]) ==
                     sum(e in 1..num_edges where edges[e,2] == n)(flow[e]));
-constraint sum(e in 1..num_edges where edges[e,2] == source)(flow[e]) == 0;
-constraint sum(e in 1..num_edges where edges[e,1] == sink)(flow[e]) == 0;
 constraint max_flow = sum(e in 1..num_edges where edges[e,2] == sink)(flow[e]);
 
 solve maximize max_flow;
